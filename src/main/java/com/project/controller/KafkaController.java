@@ -16,7 +16,7 @@ public class KafkaController {
     public List<String> consumeMsg() {
 
         return messages;
-        
+
     }
 
     @KafkaListener(groupId = "javatechie-1", topics = "javatechie", containerFactory = "kafkaListenerContainerFactory")
