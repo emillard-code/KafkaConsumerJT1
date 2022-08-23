@@ -3,6 +3,7 @@ package com.project.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.project.model.User;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -31,16 +32,6 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
-        factory.setConsumerFactory(consumerFactory());
-
-        return factory;
-
-    }
-
-    @Bean
     public ConsumerFactory<String, User> userConsumerFactory() {
 
         Map<String, Object> configs = new HashMap<>();
@@ -50,6 +41,16 @@ public class KafkaConsumerConfig {
         configs.put(ConsumerConfig.GROUP_ID_CONFIG, "javatechie-2");
 
         return new DefaultKafkaConsumerFactory<>(configs, new StringDeserializer(), new JsonDeserializer<>(User.class));
+
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
+        factory.setConsumerFactory(consumerFactory());
+
+        return factory;
 
     }
 
