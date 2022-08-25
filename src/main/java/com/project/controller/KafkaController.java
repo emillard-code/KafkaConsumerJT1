@@ -28,7 +28,7 @@ public class KafkaController {
 
     }
 
-    @KafkaListener(groupId = "javatechie-1", topics = "javatechie", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(groupId = "kafka-topic-1", topics = "kafka-topic", containerFactory = "kafkaListenerContainerFactory")
     public List<String> getMsgFromTopic(String data) {
 
         messages.add(data);
@@ -36,7 +36,7 @@ public class KafkaController {
         
     }
 
-    @KafkaListener(groupId = "javatechie-2", topics = "javatechie", containerFactory = "userKafkaListenerContainerFactory")
+    @KafkaListener(groupId = "kafka-topic-2", topics = "kafka-topic", containerFactory = "userKafkaListenerContainerFactory")
     public User getJsonMsgFromTopic(User user) {
 
         userFromTopic = user;
